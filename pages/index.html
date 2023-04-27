@@ -6,7 +6,7 @@
     <style>
     body {
       width:100%;
-
+			font-family: Arial;
     }
       header {
         margin: 5px;
@@ -35,29 +35,53 @@
 
       .photoalbum_header {
         grid-column: 1/4;
-        background-color: gray;
-        width:95%;
+        background-color: #d6d6d6;
+        width:100%;
         font-size: 20pt;
         vertical-align: middle;
       }
       .photoalbum_footer {
         grid-column: 1/4;
-        background-color: gray;
-        width:80%;
+        background-color: #d6d6d6;
+        width:100%;
       }
+			.photo {
+				margin-left: 6%;
+				margin-right: 3%;
+				margin-top: 1%;
+				margin-bottom: 3%;
+				width: 800px;
+				height: 500px;
+			}
+			.left_arrow {
+				width: 100px;
+				height: 100px;
+				margin-top: 130%;
+				margin-left: 2%;
+			}
+			.right_arrow {
+				width: 100px;
+				height: 100px;
+				margin-top: 130%;
+				margin-right: 100%;
+			}
+			.text {
+				margin-top: 1.5%;
+				margin-left: 2%;
+			}
     </style>
   </head>
   <body>
     <header>
-      Brand New Photoalbum
+       Brand New Photoalbum
       <img src="avatar.jpg" class="avatar">
     </header>
 
     <content>
-        <div class="photoalbum_header"> Анапа 2007 </div>
-        <div class="left_arrow"></div>
-        <div class="photo"></div>
-        <div class="right_arrow"></div>
+        <div class="photoalbum_header"> <p class='text'> Канадские красоты </p> </div>
+        <div class="left_arrow"> <img src="left.svg" class="left_arrow"> </div>
+        <div class="photo"> <img src="canada.jpg" class="photo"></div>
+        <div class="right_arrow"> <img src="right.svg" class="right_arrow"> </div>
         <div class="photoalbum_footer"></div>
     </content>
   </body>
