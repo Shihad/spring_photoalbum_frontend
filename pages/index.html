@@ -3,10 +3,11 @@
   <head>
     <title></title>
     <meta content="">
+    <!-- вынести в отдельный CSS-файл -->
     <style>
     body {
       width:100%;
-
+			font-family: Arial;
     }
       header {
         margin: 5px;
@@ -35,30 +36,111 @@
 
       .photoalbum_header {
         grid-column: 1/4;
-        background-color: gray;
-        width:95%;
+        background-color: #d6d6d6;
+        width:100%;
         font-size: 20pt;
         vertical-align: middle;
       }
       .photoalbum_footer {
         grid-column: 1/4;
-        background-color: gray;
-        width:80%;
+        background-color: #d6d6d6;
+        width:100%;
       }
+			.photo {
+				margin-left: 6%;
+				margin-right: 3%;
+				margin-top: 1%;
+				margin-bottom: 3%;
+				width: 800px;
+				height: 500px;
+			}
+			.left_arrow {
+				width: 100px;
+				height: 100px;
+				margin-top: 130%;
+				margin-left: 2%;
+			}
+			.right_arrow {
+				width: 100px;
+				height: 100px;
+				margin-top: 130%;
+				margin-right: 100%;
+			}
+			.text {
+				margin-top: 1.5%;
+				margin-left: 2%;
+			}
     </style>
   </head>
   <body>
+    <div id = "wrapper">
+      <!-- Превратить в компонент-->
     <header>
-      Brand New Photoalbum
+       Brand New Photoalbum
       <img src="avatar.jpg" class="avatar">
     </header>
+    <!--досюда -->
+    <photoalbum-viewer></photoalbum-viewer>
+  </div>
 
-    <content>
-        <div class="photoalbum_header"> Анапа 2007 </div>
-        <div class="left_arrow"></div>
-        <div class="photo"></div>
-        <div class="right_arrow"></div>
-        <div class="photoalbum_footer"></div>
-    </content>
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script type="text/javascript">
+      Vue.component( "photoalbum-viewer",{
+      template: `
+      <content>
+          <div class="photoalbum_header"> <p class='text'> {{album_name}} </p> </div>
+          <div class="left_arrow" v-on:click="move_left"> <img src="left.svg" class="left_arrow"> </div>
+          <div class="photo"> <img v-bind:src="photos[current_photo].img" class="photo"></div>
+          <div class="right_arrow" v-on:click="move_right"> <img src="right.svg" class="right_arrow"> </div>
+          <div class="photoalbum_footer">{{photos[current_photo].description}} </div>
+      </content>
+      `,
+      data: function () {
+        return {
+          album_name: "Красота Канады",
+          photos: [{
+            img:"canada.jpg",
+            description:"Озеро на закате"
+          },
+          {
+            img:"tarsands.jpg",
+            description:"Добыча нефтеносных песков"
+          },
+        ],
+        current_photo:1
+        }
+      },
+
+      methods: {
+        move_right() {
+        this.current_photo++;
+        if (this.current_photo>=this.photos.length) {
+          this.current_photo=this.photos.length-1;
+        }
+      },
+      move_left() {
+        this.current_photo--;
+        if (this.current_photo<0) {
+          this.current_photo=0;
+        }
+      }
+      }
+      })
+
+      Vue.component("photoalbum-header", {
+        //создать секцию template, добавить при клике на аватар выпадающее меню
+        //В меню должно быть пункты: имя пользователя, альбомы, настройки, выход
+        //Переменные - user {
+        // login, avatar
+      //}
+      }
+    )
+
+      let app = new Vue({
+        el:wrapper
+      })
+
+
+  </script>
 </html>
