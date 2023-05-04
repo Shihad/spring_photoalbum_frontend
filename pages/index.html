@@ -75,10 +75,9 @@
   <body>
     <div id = "wrapper">
       <!-- Превратить в компонент-->
-    <header>
-       Brand New Photoalbum
-      <img src="avatar.jpg" class="avatar">
-    </header>
+    <photoalbum-header v-bind:user="user">
+
+		</photoalbum-header>
     <!--досюда -->
     <photoalbum-viewer v-bind:album='album'></photoalbum-viewer>
   </div>
@@ -120,6 +119,15 @@
       })
 
       Vue.component("photoalbum-header", {
+				template:
+					`<header>
+       		Brand New Photoalbum
+      		<img v-bind:src="user.avatar" class="avatar">
+    			</header>`,
+				//data: function () {
+					//return //{user:{login:"Vasya", avatar: "avatar2.jpeg"}}
+				//},
+				props: ["user"]
         //создать секцию template, добавить при клике на аватар выпадающее меню
         //В меню должно быть пункты: имя пользователя, альбомы, настройки, выход
         //Переменные - user {
@@ -129,6 +137,7 @@
     )
 
       let app = new Vue({
+
         el:'#wrapper',
         data:{ album: {
           name: "Красота Канады",
@@ -141,9 +150,10 @@
             description:"Добыча нефтеносных песков"
           },
         ],
+      },
+      user:{login:"Vasya", avatar: "avatar.jpg"}
         }
-        }
-      })
+
 
 
   </script>
