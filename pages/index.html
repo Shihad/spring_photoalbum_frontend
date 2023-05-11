@@ -3,158 +3,17 @@
   <head>
     <title></title>
     <meta content="">
-    <!-- вынести в отдельный CSS-файл -->
-    <style>
-    body {
-      width:100%;
-			font-family: Arial;
-    }
-      header {
-        margin: 5px;
-        background-color: orange;
-        width: 99%;
-        height:50px;
-        box-sizing: padding-box ;
-      }
-      .avatar {
-        width: 49px;
-        height: 49px;
-        border-radius: 24px;
-        float: right;
-      }
-
-      content {
-        background-color: whitesmoke;
-        width: 80%;
-        min-height:600px;
-        display: block;
-        margin-left: 10%;
-        display: grid;
-        grid-template-columns: 50px 1fr 50px;
-        grid-template-rows: 70px 1fr 50px;
-      }
-
-      .photoalbum_header {
-        grid-column: 1/4;
-        background-color: #d6d6d6;
-        width:100%;
-        font-size: 20pt;
-        vertical-align: middle;
-      }
-      .photoalbum_footer {
-        grid-column: 1/4;
-        background-color: #d6d6d6;
-        width:100%;
-      }
-			.photo {
-				margin-left: 6%;
-				margin-right: 3%;
-				margin-top: 1%;
-				margin-bottom: 3%;
-				width: 800px;
-				height: 500px;
-			}
-			.left_arrow {
-				width: 100px;
-				height: 100px;
-				margin-top: 130%;
-				margin-left: 2%;
-			}
-			.right_arrow {
-				width: 100px;
-				height: 100px;
-				margin-top: 130%;
-				margin-right: 100%;
-			}
-			.text {
-				margin-top: 1.5%;
-				margin-left: 2%;
-			}
-    </style>
+    <link rel="stylesheet" href="index.css">
   </head>
   <body>
     <div id = "wrapper">
-      <!-- Превратить в компонент-->
-    <photoalbum-header v-bind:user="user">
-
-		</photoalbum-header>
-    <!--досюда -->
-    <photoalbum-viewer v-bind:album='album'></photoalbum-viewer>
-  </div>
+      <photoalbum-header v-bind:user="user">
+  		</photoalbum-header>
+      <photoalbum-viewer v-bind:album='album'>
+      </photoalbum-viewer>
+    </div>
 
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-  <script type="text/javascript">
-      Vue.component( "photoalbum-viewer",{
-      template: `
-      <content>
-          <div class="photoalbum_header"> <p class='text'> {{album.name}} </p> </div>
-          <div class="left_arrow" v-on:click="move_left"> <img src="left.svg" class="left_arrow"> </div>
-          <div class="photo"> <img v-bind:src="album.photos[current_photo].img" class="photo"></div>
-          <div class="right_arrow" v-on:click="move_right"> <img src="right.svg" class="right_arrow"> </div>
-          <div class="photoalbum_footer">{{album.photos[current_photo].description}} </div>
-      </content>
-      `,
-      props: ['album'],
-      data: function () {
-        return {
-        current_photo:0
-        }
-      },
-
-      methods: {
-        move_right() {
-        this.current_photo++;
-        if (this.current_photo>=this.album.photos.length) {
-          this.current_photo=this.album.photos.length-1;
-        }
-      },
-      move_left() {
-        this.current_photo--;
-        if (this.current_photo<0) {
-          this.current_photo=0;
-        }
-      }
-      }
-      })
-
-      Vue.component("photoalbum-header", {
-				template:
-					`<header>
-       		Brand New Photoalbum
-      		<img v-bind:src="user.avatar" class="avatar">
-    			</header>`,
-				//data: function () {
-					//return //{user:{login:"Vasya", avatar: "avatar2.jpeg"}}
-				//},
-				props: ["user"]
-        //создать секцию template, добавить при клике на аватар выпадающее меню
-        //В меню должно быть пункты: имя пользователя, альбомы, настройки, выход
-        //Переменные - user {
-        // login, avatar
-      //}
-      }
-    )
-
-      let app = new Vue({
-
-        el:'#wrapper',
-        data:{ album: {
-          name: "Красота Канады",
-          photos: [{
-            img:"canada.jpg",
-            description:"Озеро на закате"
-          },
-          {
-            img:"tarsands.jpg",
-            description:"Добыча нефтеносных песков"
-          },
-        ],
-      },
-      user:{login:"Vasya", avatar: "avatar.jpg"}
-        }
-
-
-
-  </script>
+  <script src="script.js" charset="utf-8"></script>
 </html>
