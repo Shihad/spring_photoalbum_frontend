@@ -76,13 +76,11 @@ let app = new Vue({
         body: JSON.stringify(this.tutorial)
     }
 
-    await  fetch("http://127.0.0.1:5000/albums/1")
+    await  fetch("http://127.0.0.1:5000/api/albums/1")
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-        console.log(data.photos);
         this.album.photos=data.photos;
         this.album.name=data.name;
       });
